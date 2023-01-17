@@ -1,0 +1,72 @@
+<div class="container">
+  <nav
+    class="navbar bg-body-tertiary mt-3"
+    *ngFor="let item of message; index as i"
+  >
+    <form class="container-fluid justify-content-space-between">
+      <div class="div1">
+        <h3>{{ item.topic }}</h3>
+        <p>Posted by: {{ item.postedBy }}</p>
+        <p>{{ item.message }}</p>
+      </div>
+      <div class="div2">
+        <p class="text-secondary">
+          <i class="fa-regular fa-clock"></i>
+          {{ item.date | date : "HH.mm / dd.MM.YYYY" }}
+        </p>
+        <div
+          class="btn-group"
+          role="group"
+          aria-label="Basic mixed styles example"
+        >
+          <button
+            *ngIf="item.id === whoUseNowAllInfo.id || whoUseNowAllInfo.id === 1"
+            type="button"
+            class="btn btn-warning"
+            (click)="editMessage(i)"
+          >
+            Edit
+          </button>
+          <button
+            *ngIf="item.id === whoUseNowAllInfo.id || whoUseNowAllInfo.id === 1"
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteMessage(i)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </form>
+  </nav>
+
+  <!-- ////////// Edit Message-->
+  <div *ngIf="editDiv" class="row w-100 h100 lola">
+    <form class="col-5 m-auto positino bcolGray">
+      <h2>Edit post</h2>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <input
+          [(ngModel)]="editTitle"
+          name="newTitle"
+          type="email"
+          class="form-control"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Text</label>
+        <input
+          [(ngModel)]="editText"
+          name="newText"
+          type="email"
+          class="form-control"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <button (click)="editPost()" type="submit" class="btn btn-primary">
+        Edit post
+      </button>
+    </form>
+  </div>
+</div>

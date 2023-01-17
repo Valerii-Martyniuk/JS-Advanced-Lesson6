@@ -1,0 +1,13 @@
+.positino {
+  background-color: gray;
+}
+.lola {
+  background-color: rgba(192, 192, 192, 0.692);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

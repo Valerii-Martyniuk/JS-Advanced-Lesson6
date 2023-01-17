@@ -1,0 +1,149 @@
+<div class="container mt-1">
+  <!-- // Log In && Log Out -->
+  <div *ngIf="SignUpDiv" class="row w-100 h100 lola">
+    <form class="col-5 m-auto positino">
+      <h2 [textContent]="signInBtn ? 'Log in' : 'Create account'"></h2>
+      <div class="mb-3">
+        <label *ngIf="!signInBtn" for="exampleInputEmail1" class="form-label"
+          >User name</label
+        >
+        <input
+          *ngIf="!signInBtn"
+          [(ngModel)]="newUserName"
+          name="newUserName"
+          type="email"
+          class="form-control"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          [(ngModel)]="newUserEmail"
+          name="newUserEmail"
+          type="email"
+          class="form-control"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          [(ngModel)]="newUserPassword"
+          name="newUserPassword"
+          type="password"
+          class="form-control"
+        />
+      </div>
+
+      <button
+        *ngIf="SignUpBtn"
+        [disabled]="
+          newUserName === '' || newUserEmail === '' || newUserPassword === ''
+        "
+        (click)="CreateUser()"
+        type="submit"
+        class="btn btn-primary me-3"
+      >
+        Create account
+      </button>
+      <button
+        *ngIf="signInBtn"
+        (click)="LogIn()"
+        type="submit"
+        class="btn btn-primary me-3"
+      >
+        Log in
+      </button>
+      <button (click)="reset()" type="submit" class="btn btn-primary">
+        Close
+      </button>
+    </form>
+  </div>
+
+  <!-- ///NEW Post -->
+
+  <div *ngIf="comentDiv" class="row w-100 h100 lola">
+    <form class="col-5 m-auto positino">
+      <h2>Add post</h2>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <input
+          [(ngModel)]="newTitle"
+          name="newTitle"
+          type="email"
+          class="form-control"
+          aria-describedby="emailHelp"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Text</label>
+        <textarea
+          [(ngModel)]="newText"
+          name="newText"
+          class="form-control"
+          placeholder="Leave a comment here"
+        ></textarea>
+      </div>
+      <button (click)="addPost()" type="submit" class="btn btn-primary me-3">
+        Add post
+      </button>
+      <button (click)="reset()" type="submit" class="btn btn-primary">
+        Close
+      </button>
+    </form>
+  </div>
+
+  <!-- ////////// Top Form -->
+
+  <ng-container *ngIf="whoUseNow === ''">
+    <nav class="navbar bg-body-tertiary">
+      <form class="container-fluid justify-content-space-between">
+        <h2>Angular Form</h2>
+        <div>
+          <button
+            (click)="SignUpDiv = !SignUpDiv; signInBtn = !signInBtn"
+            class="btn btn-outline-success me-2"
+            type="button"
+          >
+            Sign In
+          </button>
+          <button
+            (click)="SignUpDiv = !SignUpDiv; SignUpBtn = !SignUpBtn"
+            class="btn btn-outline-primary me-2"
+            type="button"
+          >
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </nav>
+  </ng-container>
+
+  <ng-container *ngIf="whoUseNow != ''">
+    <nav class="navbar bg-body-tertiary">
+      <form class="container-fluid justify-content-space-between">
+        <h2>Angular Form</h2>
+        <div>
+          <button
+            (click)="comentDiv = true"
+            class="btn btn-outline-warning"
+            type="button"
+          >
+            Add post
+          </button>
+          <button disabled class="btn btn-secondary" type="button">
+            {{ whoUseNow }}
+          </button>
+          <button
+            (click)="reloadWhoUse()"
+            class="btn btn-outline-danger me-2"
+            type="button"
+          >
+            Sign Out
+          </button>
+        </div>
+      </form>
+    </nav>
+  </ng-container>
+</div>
